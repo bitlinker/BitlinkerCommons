@@ -24,7 +24,7 @@ namespace Commons
 	class IOException : public Exception
 	{
 	public:
-		explicit IOException(const string& what)
+		explicit IOException(const std::string& what)
 			: Exception(what)
 		{
 		}
@@ -42,7 +42,7 @@ namespace Commons
 	class SerializationException : public Exception
 	{
 	public:
-		explicit SerializationException(const string& what)
+		explicit SerializationException(const std::string& what)
 			: Exception(what)
 		{
 		}

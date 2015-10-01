@@ -1,11 +1,12 @@
 #pragma once
 
-// TODO: update
-class NonObject
+namespace Commons
 {
-protected:
-	NonObject() {};
-private:
-	NonObject(const NonObject&);
-	NonObject& operator=(const NonObject&);
-};
+    class NonObject
+    {
+    private:
+        NonObject() {};
+        NonObject(const NonObject&);
+        NonObject& operator=(const NonObject&);
+    };
+}

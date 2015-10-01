@@ -1,10 +1,13 @@
 #pragma once
 
-class NonCopyable
+namespace Commons
 {
-protected:
-	NonCopyable() {};
-private:
-	NonCopyable(const NonCopyable&);
-	NonCopyable& operator=(const NonCopyable&);
-};
+    class NonCopyable
+    {
+    protected:
+        NonCopyable() {};
+    private:
+        NonCopyable(const NonCopyable&);
+        NonCopyable& operator=(const NonCopyable&);
+    };
+}
