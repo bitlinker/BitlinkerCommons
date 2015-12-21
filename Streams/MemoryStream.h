@@ -14,6 +14,8 @@ namespace Commons
 
         void* getPtr() const { return m_Ptr; }
         const void* getConstPtr() const { return m_Ptr; }
+        void* getCurPtr() const { return m_Ptr + m_pos; }
+        const void* getCurConstPtr() const { return m_Ptr + m_pos; }
 
         virtual void write(const void* data, uint32_t size);
         virtual void read(void* data, uint32_t size);
@@ -24,7 +26,7 @@ namespace Commons
 
     private:
         std::vector<uint8_t> m_buffer;
-        void* m_Ptr;
+        uint8_t* m_Ptr;
         bool m_isExternPtr;
         uint32_t m_size;
         uint32_t m_pos;

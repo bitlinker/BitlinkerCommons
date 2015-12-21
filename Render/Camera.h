@@ -1,5 +1,6 @@
 #pragma once
 #include <Render/RenderCommon.h>
+#include <Render/AABB.h>
 #include <memory>
 
 namespace Commons
@@ -23,6 +24,9 @@ namespace Commons
 
 			const glm::quat getRotation() const;
 			void setRotation(const glm::quat& rotation);
+
+            bool isInFrustum(const AABB& aabb) const;
+            bool isInFrustum(const glm::vec3& pos, float radius) const;
 
 		private:
 			glm::mat4 m_proj;

@@ -61,5 +61,17 @@ namespace Commons
 			}
 			return m_modelView;
 		}
+
+        bool Camera::isInFrustum(const AABB& aabb) const
+        {
+            // TODO: implement
+            return true;
+        }
+
+        bool Camera::isInFrustum(const glm::vec3& pos, float radius) const
+        {
+            // TODO: implement
+            return true;
+        }
 	}
 }
