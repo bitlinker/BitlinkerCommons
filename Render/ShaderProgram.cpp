@@ -136,12 +136,41 @@ namespace Commons
 
 		bool ShaderProgram::setUniformSampler2D(uint32_t index, uint32_t samplerId)
 		{
-			if (!isLinked)
+			if (!isLinked) // TODO: throw exception if program incorrect, so checks will not be needed. Also assert is required if bound
 				return false;
 
-			glUniform1ui(index, samplerId);
+			::glUniform1ui(index, samplerId);
 			return true;
 		}
+
+        bool ShaderProgram::setUniformFloat(uint32_t index, float value)
+        {
+            if (!isLinked)
+                return false;
+
+            ::glUniform1f(index, value);
+            return true;
+        }
+
+        bool ShaderProgram::setUniformVec2(uint32_t index, const glm::vec2& vec)
+        {
+            if (!isLinked)
+                return false;
+
+            //::glUniform2fv(index, 2, &vec.x);
+            ::glUniform2f(index, vec.x, vec.y);
+            return true;
+        }
+
+        bool ShaderProgram::setUniformVec3(uint32_t index, const glm::vec3& vec)
+        {
+            if (!isLinked)
+                return false;
+
+            //::glUniform3fv(index, 3, &vec.x);
+            ::glUniform3f(index, vec.x, vec.y, vec.z);
+            return true;
+        }
 
 		uint32_t ShaderProgram::getNumAttributes()
 		{

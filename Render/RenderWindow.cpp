@@ -23,10 +23,10 @@ namespace Commons
 		    ::glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 			// TODO: monitor & res selection
-			GLFWmonitor* mon = ::glfwGetPrimaryMonitor();
-			const GLFWvidmode* mode = ::glfwGetVideoMode(mon);
+			GLFWmonitor* mon = params.isFullscreen ? ::glfwGetPrimaryMonitor() : NULL;
+			//const GLFWvidmode* mode = ::glfwGetVideoMode(mon);
 
-			m_window = std::shared_ptr<GLFWwindow>(::glfwCreateWindow(params.width, params.height, params.title.c_str(), NULL, NULL), ::glfwDestroyWindow);
+			m_window = std::shared_ptr<GLFWwindow>(::glfwCreateWindow(params.width, params.height, params.title.c_str(), mon, NULL), ::glfwDestroyWindow);
 			if (m_window == nullptr)
 				throw Commons::UnknownException("Can't create GLFW window");
 			::glfwMakeContextCurrent(m_window.get());

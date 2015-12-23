@@ -35,13 +35,12 @@ namespace Commons
 				return m_handle;
 			}
 
-			// TODO: bind wrapper?
-			virtual void bind()
+			virtual void bind() override
 			{
 				::glBindBuffer(m_type, m_handle);
 			}
 
-			virtual void unbind()
+			virtual void unbind() override
 			{
 				::glBindBuffer(m_type, 0);
 			}

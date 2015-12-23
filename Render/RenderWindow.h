@@ -13,7 +13,8 @@ namespace Commons
 			uint32_t width;
 			uint32_t height;
 			std::string title;
-			//bool isFullscreen; // TODO: monitor number
+            //uint32_t fullscreenMonitorId;  // TODO: monitor number for fullscreen
+			bool isFullscreen;
 
 			// GL window settings
 			uint32_t fsaaSamples;

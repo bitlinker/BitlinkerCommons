@@ -34,6 +34,9 @@ namespace Commons
 
 			bool setUniformMatrix(uint32_t index, const glm::mat4& mat);
 			bool setUniformSampler2D(uint32_t index, uint32_t samplerId);
+            bool setUniformFloat(uint32_t index, float value);
+            bool setUniformVec2(uint32_t index, const glm::vec2& vec);
+            bool setUniformVec3(uint32_t index, const glm::vec3& vec);
 
 		private:
 			bool checkValidateStatus();

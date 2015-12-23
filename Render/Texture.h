@@ -11,7 +11,9 @@ namespace Commons
 		class Texture : public IBindable, public NonCopyable
 		{
 		public:
-			Texture();
+            // TODO: rename to texture2d
+            // TODO: construct from image data
+			Texture(); // TODO: private constructor, create in context only
 			virtual ~Texture();
 
 			void setMinFilter(GLenum filter);
@@ -19,11 +21,11 @@ namespace Commons
 
 			void setTexData2d(GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels);
 
-			virtual void bind();
-			virtual void unbind();
+			virtual void bind() override;
+			virtual void unbind() override;
 
 		private:
-			GLuint m_tex;
+			GLuint mTex;
 		};
 
 		typedef std::shared_ptr<Texture> TexturePtr;

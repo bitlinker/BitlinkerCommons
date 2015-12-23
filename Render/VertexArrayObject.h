@@ -28,12 +28,12 @@ namespace Commons
 				return m_handle;
 			}
 
-			virtual void bind()
+			virtual void bind() override
 			{
 				::glBindVertexArray(m_handle);
 			}
 
-			virtual void unbind()
+			virtual void unbind() override
 			{
 				::glBindVertexArray(0);
 			}
