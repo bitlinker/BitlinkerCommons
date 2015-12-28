@@ -55,7 +55,7 @@ namespace Commons
 			if (m_isModelViewDirty)
 			{
 				m_modelView = glm::mat4();
-				m_modelView *= glm::mat4_cast(-m_rot);
+                m_modelView *= glm::mat4_cast(-m_rot);
                 m_modelView *= glm::translate(-m_pos);
 				m_isModelViewDirty = false;
 			}

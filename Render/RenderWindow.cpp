@@ -58,6 +58,8 @@ namespace Commons
 			const GLubyte* renderer = ::glGetString(GL_RENDERER); // get renderer string
 			const GLubyte* version = ::glGetString(GL_VERSION); // version as a string
 
+            // Fix the glewInit bug: http://stackoverflow.com/questions/10857335/opengl-glgeterror-returns-invalid-enum-after-call-to-glewinit
+            glGetError();
 			LOG_DEBUG("Renderer: %s, version: %s", renderer, version);
 		}
 
