@@ -119,27 +119,27 @@ namespace Commons
 
 		uint32_t ShaderProgram::getUniformLocation(const std::string& name)
 		{
-			if (!isLinked)
-				return 0;
-
 			return (uint32_t)glGetUniformLocation(m_program, name.c_str());
 		}
 
-		bool ShaderProgram::setUniformMatrix(uint32_t index, const glm::mat4& mat)
+		bool ShaderProgram::setUniformMat4(uint32_t index, const glm::mat4& mat)
 		{
-			if (!isLinked)
-				return false;
-
-			glUniformMatrix4fv(index, 1, GL_FALSE, &mat[0][0]);
+			::glUniformMatrix4fv(index, 1, GL_FALSE, &mat[0][0]);
 			return true;
 		}
 
-		bool ShaderProgram::setUniformSampler2D(uint32_t index, uint32_t samplerId)
+        bool ShaderProgram::setUniformMat3(uint32_t index, const glm::mat3& mat)
+        {
+            ::glUniformMatrix3fv(index, 1, GL_FALSE, &mat[0][0]);
+            return true;
+        }
+
+		bool ShaderProgram::setUniformSampler2D(uint32_t index, int32_t samplerId)
 		{
 			if (!isLinked) // TODO: throw exception if program incorrect, so checks will not be needed. Also assert is required if bound
 				return false;
 
-			::glUniform1ui(index, samplerId);
+			::glUniform1i(index, samplerId);
 			return true;
 		}
 
