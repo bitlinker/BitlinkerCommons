@@ -66,7 +66,6 @@ namespace Commons
         {
             if (mStateDirty)
             {                
-                auto e = glGetError();
                 ::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mMinFilter);
                 ::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mMagFilter);
                 ::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mWrapS);
@@ -99,7 +98,6 @@ namespace Commons
             }
         }
 
-        // TODO: gl calls debug with asserts
         void Texture::setData(uint32_t level, FormatMode format, uint32_t width, uint32_t height, const uint8_t* pixels)
         {
             bind(); // TODO: check if bound already?
@@ -121,6 +119,14 @@ namespace Commons
             mWrapS = TranslateWrapMode(wrapS);
             mWrapT = TranslateWrapMode(wrapT);
             mStateDirty = true;
+        }
+
+        void Texture::setMipLevels(uint32_t base, uint32_t max)
+        {
+            bind(); // TODO: eliminate texture binding?
+            ::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, base);
+            ::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, max);
+            CHECK_GL_ERROR();
         }
     }
 }
