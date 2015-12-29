@@ -10,6 +10,15 @@
 #include <Render/Shader.h>
 #include <Render/ShaderProgram.h>
 
+// TODO: build params
+#define GL_DEBUG
+
+#ifdef GL_DEBUG
+#   define CHECK_GL_ERROR() assert(::glGetError() == 0);
+#else
+#   define CHECK_GL_ERROR()
+#endif
+
 namespace Commons
 {
 	namespace Render
