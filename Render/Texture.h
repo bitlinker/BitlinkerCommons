@@ -43,6 +43,7 @@ namespace Commons
             void setMipLevels(uint32_t start, uint32_t end);
 
             void setData(uint32_t level, FormatMode format, uint32_t width, uint32_t height, const uint8_t* pixels);
+            void setSubData(uint32_t level, FormatMode format, uint32_t x, uint32_t y, uint32_t width, uint32_t height, const uint8_t* pixels);
 
 			virtual void bind() override;
 			virtual void unbind() override;

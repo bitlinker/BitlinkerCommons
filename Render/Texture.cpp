@@ -106,6 +106,15 @@ namespace Commons
             ::glTexImage2D(GL_TEXTURE_2D, level, glInternalFormat, width, height, 0, glFormat, GL_UNSIGNED_BYTE, pixels);
             CHECK_GL_ERROR();
         }
+
+        void Texture::setSubData(uint32_t level, FormatMode format, uint32_t x, uint32_t y, uint32_t width, uint32_t height, const uint8_t* pixels)
+        {
+            bind(); // TODO: check if bound already?
+            GLenum glFormat, glInternalFormat; // TODO: cache format
+            TranslateFormat(format, glFormat, glInternalFormat);
+            ::glTexSubImage2D(GL_TEXTURE_2D, level, x, y, width, height, glFormat, GL_UNSIGNED_BYTE, pixels);
+            CHECK_GL_ERROR();
+        }
     
         void Texture::setFilters(FilterMode minFilter, FilterMode magFilter)
         {
