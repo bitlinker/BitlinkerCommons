@@ -1,12 +1,18 @@
 #pragma once
 #include <Render/RenderCommon.h>
-#include <Render/AABB.h>
+#include <Render/Frustum.h>
 #include <memory>
 
 namespace Commons
 {
 	namespace Render
 	{
+        /*
+        * The initial camera orientation is following:
+        * x axis - left,
+        * y axis - up,
+        * z axis - backwards
+        */
 		class Camera
 		{
 		public:
@@ -18,6 +24,7 @@ namespace Commons
 
 			const glm::mat4 getProjection() const { return m_proj; };
 			const glm::mat4 getModelview() const;
+            const glm::mat4 getMatrix() const;
 
 			const glm::vec3 getTranslation() const;
 			void setTranslation(const glm::vec3& pos);
@@ -25,8 +32,7 @@ namespace Commons
 			const glm::quat getRotation() const;
 			void setRotation(const glm::quat& rotation);
 
-            bool isInFrustum(const AABB& aabb) const;
-            bool isInFrustum(const glm::vec3& pos, float radius) const;
+            const Frustum& getFrustum() const;
 
 		private:
 			glm::mat4 m_proj;
@@ -35,8 +41,12 @@ namespace Commons
 			glm::quat m_rot;
 
 			// Matrix cache
-			mutable glm::mat4 m_modelView;
-			mutable bool m_isModelViewDirty;
+			mutable glm::mat4 mModelView;
+			mutable bool mIsModelViewDirty;
+
+            // Frustum cache
+            mutable Frustum mFrustum;
+            mutable bool mIsFrustumDirty;
 		};
 
 		typedef std::shared_ptr<Camera> CameraPtr;

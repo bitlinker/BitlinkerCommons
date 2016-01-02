@@ -8,7 +8,9 @@ namespace Commons
 			: m_proj()
 			, m_pos()
 			, m_rot()
-			, m_isModelViewDirty(true)
+			, mIsModelViewDirty(true)
+            , mFrustum()
+            , mIsFrustumDirty(true)
 		{
 		}
 
@@ -21,11 +23,13 @@ namespace Commons
 		void Camera::setPerspective(float fovy, float aspect, float far, float near)
 		{
 			m_proj = glm::perspective(fovy, aspect, near, far);
+            mIsFrustumDirty = true;
 		}
 
 		void Camera::setOrtho(float left, float top, float right, float bottom, float far, float near)
 		{
 			m_proj = glm::ortho(left, right, bottom, top, near, far);
+            mIsFrustumDirty = true;
 		}
 
 		const glm::vec3 Camera::getTranslation() const
@@ -36,7 +40,8 @@ namespace Commons
 		void Camera::setTranslation(const glm::vec3& pos)
 		{
 			m_pos = pos;
-			m_isModelViewDirty = true;
+			mIsModelViewDirty = true;
+            mIsFrustumDirty = true;
 		}
 
 		const glm::quat Camera::getRotation() const
@@ -47,31 +52,35 @@ namespace Commons
 		void Camera::setRotation(const glm::quat& rotation)
 		{
 			m_rot = rotation;
-			m_isModelViewDirty = true;
+			mIsModelViewDirty = true;
+            mIsFrustumDirty = true;
 		}
 
 		const glm::mat4 Camera::getModelview() const
 		{
-			if (m_isModelViewDirty)
+			if (mIsModelViewDirty)
 			{
-				m_modelView = glm::mat4();
-                m_modelView *= glm::mat4_cast(-m_rot);
-                m_modelView *= glm::translate(-m_pos);
-				m_isModelViewDirty = false;
+				mModelView = glm::mat4(); // TODO: optimize
+                mModelView *= glm::mat4_cast(-m_rot);
+                mModelView *= glm::translate(-m_pos);
+				mIsModelViewDirty = false;
 			}
-			return m_modelView;
+			return mModelView;
 		}
 
-        bool Camera::isInFrustum(const AABB& aabb) const
+        const glm::mat4 Camera::getMatrix() const
         {
-            // TODO: implement
-            return true;
+            return getProjection() * getModelview();
         }
 
-        bool Camera::isInFrustum(const glm::vec3& pos, float radius) const
+        const Frustum& Camera::getFrustum() const 
         {
-            // TODO: implement
-            return true;
+            if (mIsFrustumDirty)
+            {
+                mFrustum.setFromCamMatrix(getMatrix());
+                mIsFrustumDirty = false;
+            }
+            return mFrustum;
         }
 	}
 }

@@ -12,6 +12,8 @@ namespace Commons
 		class BufferObject : public IBindable, public NonCopyable
 		{
 		public:
+            static void* BUFFER_OFFSET(size_t* offset) { return static_cast<void*>(offset); }
+
 			BufferObject(GLenum type)
 				: m_handle(0)
 				, m_type(type)

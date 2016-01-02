@@ -15,6 +15,34 @@ namespace Commons
             {                
             }
 
+            /*
+            * Oder: bottom plane then top plane, starting from min point clockwise
+            */
+            const glm::vec3 getVertex(uint32_t index) const
+            {
+                assert(index < 8);
+                switch (index)
+                {
+                case 0:
+                    return mMins;
+                case 1:
+                    return glm::vec3(mMins.x, mMins.y, mMaxs.z);
+                case 2:
+                    return glm::vec3(mMaxs.x, mMins.y, mMaxs.z);
+                case 3:
+                    return glm::vec3(mMaxs.x, mMins.y, mMins.z);
+                case 4:
+                    return glm::vec3(mMins.x, mMaxs.y, mMins.z);
+                case 5:
+                    return glm::vec3(mMins.x, mMaxs.y, mMaxs.z);
+                case 6:
+                    return mMaxs;
+                case 7:
+                    return glm::vec3(mMaxs.x, mMaxs.y, mMins.z);
+                }                
+                return mMins;
+            }
+
 		public:
 			glm::vec3 mMins;
             glm::vec3 mMaxs;
