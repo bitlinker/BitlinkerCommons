@@ -29,6 +29,7 @@ namespace Commons
         {
             assert(srcInfo.getNumChannels() == dstInfo.getNumChannels());
 
+
             const float tx = float(srcInfo.getWidth()) / dstInfo.getWidth();
             const float ty = float(srcInfo.getHeight()) / dstInfo.getHeight();
             const uint32_t srcStride = srcInfo.getScanlineSize();
