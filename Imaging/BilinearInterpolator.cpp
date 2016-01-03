@@ -11,8 +11,8 @@ namespace Commons
             assert(srcInfo.getNumChannels() == dstInfo.getNumChannels());
 
             uint32_t a, b, c, d, x, y, index;
-            float tx = (float)(srcInfo.getWidth() - 1) / dstInfo.getWidth();
-            float ty = (float)(srcInfo.getHeight() - 1) / dstInfo.getHeight();
+            float tx = (float)(srcInfo.getWidth()) / dstInfo.getWidth();
+            float ty = (float)(srcInfo.getHeight()) / dstInfo.getHeight();
             float x_diff, y_diff;
             const uint32_t srcStride = srcInfo.getScanlineSize();
             const uint32_t dstStride = dstInfo.getScanlineSize();
@@ -29,19 +29,29 @@ namespace Commons
                     y_diff = ((ty * i) - y);
 
                     index = srcInfo.getPixelOffset(x, y);
-                    a = (int32_t)index;
-                    b = (int32_t)(index + numChannels);
-                    c = (int32_t)(index + srcStride);
-                    d = (int32_t)(index + srcStride + numChannels);
-
-                    // TODO: make fixed point calculations
-                    for (uint32_t k = 0; k < numChannels; k++)
+                    if (x < srcInfo.getWidth() - 1 && y < srcInfo.getHeight() - 1)
                     {
-                        dst[dstInfo.getPixelOffset(j, i) + k] = (uint8_t)(
-                            src[a + k] * (1.F - x_diff) * (1.F - y_diff)
-                            + src[b + k] * (1.F - y_diff) * (x_diff)
-                            +src[c + k] * (y_diff)* (1.F - x_diff)
-                            + src[d + k] * (y_diff)* (x_diff));
+                        a = (int32_t)index;
+                        b = (int32_t)(index + numChannels);
+                        c = (int32_t)(index + srcStride);
+                        d = (int32_t)(index + srcStride + numChannels);
+
+                        // TODO: make fixed point calculations
+                        for (uint32_t k = 0; k < numChannels; k++)
+                        {
+                            dst[dstInfo.getPixelOffset(j, i) + k] = (uint8_t)(
+                                src[a + k] * (1.F - x_diff) * (1.F - y_diff)
+                                + src[b + k] * (1.F - y_diff) * (x_diff)
+                                +src[c + k] * (y_diff)* (1.F - x_diff)
+                                + src[d + k] * (y_diff)* (x_diff));
+                        }
+                    }
+                    else
+                    {
+                        for (uint32_t k = 0; k < numChannels; k++)
+                        {
+                            dst[dstInfo.getPixelOffset(j, i) + k] = src[index + k];
+                        }
                     }
                 }
             }
