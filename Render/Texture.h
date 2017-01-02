@@ -21,7 +21,7 @@ namespace Commons
             enum WrapMode
             {
                 WRAP_REPEAT,
-                WRAP_CLAMP,
+                WRAP_CLAMP_TO_EDGE,
             };
 
             enum FormatMode

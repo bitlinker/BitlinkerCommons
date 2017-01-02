@@ -24,7 +24,7 @@ namespace Commons
             switch (wrapMode)
             {
             case Texture::WRAP_REPEAT: return GL_REPEAT;
-            case Texture::WRAP_CLAMP: return GL_CLAMP;
+            case Texture::WRAP_CLAMP_TO_EDGE: return GL_CLAMP_TO_EDGE;
             default:
                 assert("Unsupported wrap mode");
                 return GL_REPEAT;
