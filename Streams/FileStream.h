@@ -21,12 +21,12 @@ namespace Commons
         FileStream(const std::string& fileName, Mode mode);
         virtual ~FileStream();
 
-        virtual void write(const void* data, uint32_t size);
-        virtual void read(void* data, uint32_t size);
-        virtual uint32_t tell();
-        virtual uint32_t size();
+        virtual void write(const void* data, size_type size);
+        virtual void read(void* data, size_type size);
+        virtual size_type tell();
+        virtual size_type size();
         virtual bool isEOF();
-        virtual void seek(int32_t offset, Origin origin);
+        virtual void seek(offset_type offset, Origin origin);
 
     private:
         FILE* m_f;

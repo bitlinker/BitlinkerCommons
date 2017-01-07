@@ -3,7 +3,7 @@
 
 namespace Commons
 {
-    MemoryStream::MemoryStream(uint8_t* buffer, uint32_t size)
+    MemoryStream::MemoryStream(uint8_t* buffer, size_type size)
     : m_buffer()
     , m_Ptr(buffer)
     , m_isExternPtr(true)
@@ -12,7 +12,7 @@ namespace Commons
     {
     }
 
-    MemoryStream::MemoryStream(uint32_t size)
+    MemoryStream::MemoryStream(size_type size)
     : m_buffer(size)
     , m_Ptr(&m_buffer[0])
     , m_isExternPtr(false)
@@ -25,7 +25,7 @@ namespace Commons
     {
     }
 
-    void MemoryStream::write(const void* data, uint32_t size)
+    void MemoryStream::write(const void* data, size_type size)
     {
         if (m_pos + size <= m_size)
         {
@@ -38,7 +38,7 @@ namespace Commons
         }
     }
 
-    void MemoryStream::read(void* data, uint32_t size)
+    void MemoryStream::read(void* data, size_type size)
     {
         if (m_pos + size <= m_size)
         {
@@ -51,12 +51,12 @@ namespace Commons
         }
     }
 
-    uint32_t MemoryStream::tell()
+    IOStream::size_type MemoryStream::tell()
     {
         return m_pos;
     }
 
-    uint32_t MemoryStream::size()
+    IOStream::size_type MemoryStream::size()
     {
         return m_size;
     }
@@ -66,7 +66,7 @@ namespace Commons
         return m_pos >= m_size;
     }
 
-    void MemoryStream::seek(int32_t offset, Origin origin)
+    void MemoryStream::seek(offset_type offset, Origin origin)
     {
         bool result = true;
         switch (origin)

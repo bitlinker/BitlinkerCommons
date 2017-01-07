@@ -45,7 +45,7 @@ namespace Commons
         m_f = nullptr;
     }
 
-    void FileStream::write(const void* data, uint32_t size)
+    void FileStream::write(const void* data, size_type size)
     {
         if (::fwrite(data, size, 1, m_f) != 1)
         {
@@ -53,7 +53,7 @@ namespace Commons
         }
     }
 
-    void FileStream::read(void* data, uint32_t size)
+    void FileStream::read(void* data, size_type size)
     {
         if (::fread(data, size, 1, m_f) != 1)
         {
@@ -61,12 +61,12 @@ namespace Commons
         }
     }
 
-    uint32_t FileStream::tell()
+    IOStream::size_type FileStream::tell()
     {
-        return ftell(m_f);
+        return ::ftell(m_f);
     }
 
-    uint32_t FileStream::size()
+    IOStream::size_type FileStream::size()
     {
         uint32_t curPos = tell();
         seek(0, ORIGIN_END);
@@ -80,7 +80,7 @@ namespace Commons
         return (::feof(m_f) != 0);
     }
 
-    void FileStream::seek(int32_t offset, Origin origin)
+    void FileStream::seek(offset_type offset, Origin origin)
     {
         if (::fseek(m_f, offset, TranslateOrigin(origin)) != 0)
         {
