@@ -8,6 +8,9 @@ namespace Commons
 {
 	namespace Render
 	{
+        class GLContext;
+
+        // TODO: texture2d
 		class Texture : public IBindable, public NonCopyable
 		{
         public:
@@ -33,9 +36,9 @@ namespace Commons
             };
 
 		public:
-            // TODO: rename to texture2d
+            // TODO: rename to texture2d; texture; texturearray; texture3d; texturecube
             // TODO: construct from image data
-			Texture(); // TODO: private constructor, create in context only
+			Texture(GLContext* context); // TODO: shared ptr?
 			virtual ~Texture();
 
 			void setFilters(FilterMode minFilter, FilterMode magFilter);
@@ -52,6 +55,7 @@ namespace Commons
             void refreshState();
 
 		private:
+            GLContext* mContext;
 			GLuint mTex;
 
             // State:

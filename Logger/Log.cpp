@@ -23,7 +23,7 @@ namespace Commons
 		{
 		}
 
-		static char* TranslateLogLevel(Log::LOG_LEVEL level)
+		static const char* TranslateLogLevel(Log::LOG_LEVEL level)
 		{
 			switch (level)
 			{

@@ -38,7 +38,7 @@ namespace Commons
         class SharedTextureMgr : public NonCopyable
         {
         public:
-            SharedTextureMgr(/*const GLContextPtr& context*/); // TODO: create from context
+            SharedTextureMgr(GLContext* context);
             virtual ~SharedTextureMgr();
 
             void addLoader(const ITextureLoaderPtr& loader, uint32_t priority = 0);
@@ -56,6 +56,7 @@ namespace Commons
             std::map<TTextureKey, SharedTextureWeakPtr> mTextures;      // key: texture key, value: texture weak pointer
             std::map<SharedTexture*, TTextureKey> mTexturesToDelete;          // key: raw texture pointer, value: texture key
             std::multimap<uint32_t, ITextureLoaderPtr> mTextureLoaders; // key: priority, value: loader object
+            GLContext* mContext;
         };
 
         typedef std::shared_ptr<SharedTextureMgr> SharedTextureMgrPtr;

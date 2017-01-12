@@ -7,6 +7,8 @@ namespace Commons
 	namespace Render
 	{
 		GLContext::GLContext()
+            : mCurShader(0)
+            , mCurTexture(0)
 		{
 		}
 
@@ -47,5 +49,65 @@ namespace Commons
 			glm::mat4 camMatrix = camera->getProjection() * camera->getModelview();
 			rootNode->render(camMatrix);
 		}
+
+        static void enableOption(bool enabled, GLenum option)
+        {
+            enabled ? ::glEnable(option) : ::glDisable(option);
+            CHECK_GL_ERROR();
+        }
+
+        void GLContext::setBlend(bool enabled)
+        {
+            // TODO: cache?
+            enableOption(enabled, GL_BLEND);
+        }
+
+        void GLContext::setCullFace(bool enabled)
+        {
+            enableOption(enabled, GL_CULL_FACE);
+        }
+
+        void GLContext::setDepthTest(bool enabled)
+        {
+            enableOption(enabled, GL_DEPTH_TEST);
+        }
+
+        //void GLContext::bindShader(const ShaderProgram* shader)
+        //{
+        //    //assert(shader);
+        //    //if (shader->getProgram() != mCurShader)
+        //    //{
+        //    //    shader->use(); // TODO: context...
+        //    //    mCurShader = shader->get();                
+        //    //}
+        //}
+
+        //// Bind buffer
+
+
+        GLuint GLContext::genTexture()
+        {
+            GLuint tex = 0;
+            ::glGenTextures(1, &tex);
+            CHECK_GL_ERROR();
+            return tex;
+        }
+
+        void GLContext::deleteTexture(GLuint tex)
+        {
+            ::glDeleteTextures(1, &tex);
+            CHECK_GL_ERROR();
+        }
+
+        void GLContext::bindTexture(GLuint tex)
+        {
+            // TODO: drop current texture on state change
+            if (mCurTexture != tex)
+            {
+                ::glBindTexture(GL_TEXTURE_2D, tex);
+                CHECK_GL_ERROR();
+                mCurTexture = tex;
+            }           
+        }
 	}
 }

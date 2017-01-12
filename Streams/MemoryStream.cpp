@@ -1,5 +1,6 @@
 #include <Streams/MemoryStream.h>
 #include <iostream>
+#include <memory.h>
 
 namespace Commons
 {

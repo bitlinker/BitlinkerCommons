@@ -1,4 +1,3 @@
-#pragma once
 #include <Render/Frustum.h>
 
 namespace Commons

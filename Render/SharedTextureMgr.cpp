@@ -9,8 +9,8 @@ namespace Commons
 {
     namespace Render
     {
-        SharedTextureMgr::SharedTextureMgr(/*const GLContextPtr& context*/)
-            // TODO: init members
+        SharedTextureMgr::SharedTextureMgr(GLContext* context)
+            : mContext(context) // TODO: init members            
         {
             LOG_DEBUG("SharedTextureMgr created");
         }
@@ -75,7 +75,7 @@ namespace Commons
         TexturePtr SharedTextureMgr::loadTexture(const std::string& name, const void* extra)
         {
             LOG_DEBUG("Loading texture: %s", name.c_str());
-            TexturePtr tex(new Texture()); // TODO: create texture in context
+            TexturePtr tex(new Texture(mContext)); // TODO: create texture in context
 
             auto it = mTextureLoaders.begin();
             const auto itEnd = mTextureLoaders.end();

@@ -33,7 +33,7 @@ namespace Commons
     FileStream::FileStream(const std::string& fileName, Mode mode)
     : m_f(nullptr)
     {
-        if (::fopen_s(&m_f, fileName.c_str(), TranslateMode(mode)) != 0)
+        if ((m_f = ::fopen(fileName.c_str(), TranslateMode(mode))) != 0)
         {
             throw IOException(StringUtils::FormatString("Can't open file %s", fileName.data()));
         }

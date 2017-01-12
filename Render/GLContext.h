@@ -25,21 +25,34 @@ namespace Commons
 	{
 		class GLContext
 		{
+            friend class Texture;
 		public:
 			GLContext();
 			~GLContext();
 
 			bool tick(float fTimeDelta);
 			// TODO: and framebuffer
+            // TODO: move
 			void render(const CameraPtr& camera, const RenderNodePtr& rootNode, const RenderWindow& window);
 
-			// TODO: create all GL-related resources here...
-			// Use some loader as parameter
-			TexturePtr createTexture();
-			ShaderPtr createShader();
-			ShaderProgramPtr createShaderProgram();
+
+            // State machine:
+            void setBlend(bool isEnabled);
+            void setCullFace(bool isEnabled);
+            void setDepthTest(bool isEnabled);
+
+        private:
+            // To be used by context friend classes:
+            // TODO: custom context impl
+            GLuint genTexture();
+            void deleteTexture(GLuint tex);
+            void bindTexture(GLuint tex);
+
+            //void bindShader(const ShaderProgram* shader);
 
 		private:
+            GLuint mCurTexture; // TODO: for each sampler
+            GLuint mCurShader;
 		};
 	}
 }

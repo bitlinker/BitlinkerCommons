@@ -1,4 +1,3 @@
-#pragma once
 #include <Render/RenderCommon.h>
 #include <Render/AABB.h>
 

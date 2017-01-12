@@ -4,10 +4,16 @@
 
 namespace Commons
 {    
-    class EndianUtils : public NonObject
+    class Endianness : public NonObject
     {
     public:
-        static bool IsArchBigEndian();
+        enum EndiannessType
+        {
+            LITTLE_ENDIAN,
+            BIG_ENDIAN
+        };
+
+        static EndiannessType getCpuEndianness();
 
         static uint16_t ByteSwapUInt16(uint16_t source);
         static uint32_t ByteSwapUInt32(uint32_t source);

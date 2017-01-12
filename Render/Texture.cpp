@@ -31,29 +31,27 @@ namespace Commons
             }
         }
 
-		Texture::Texture()
-			: mTex(0)
+		Texture::Texture(GLContext* context)
+			: mContext(context)
+            , mTex(0)
             , mMinFilter(TranslateFilterMode(FILTER_LINEAR))
             , mMagFilter(TranslateFilterMode(FILTER_LINEAR))
             , mWrapS(TranslateWrapMode(WRAP_REPEAT))
             , mWrapT(TranslateWrapMode(WRAP_REPEAT))
             , mStateDirty(true)
         {
-			::glGenTextures(1, &mTex);
-            CHECK_GL_ERROR();
+            mContext->genTexture();
 		}
 
 		Texture::~Texture()
 		{
-			::glDeleteTextures(1, &mTex);
-            CHECK_GL_ERROR();
+            mContext->deleteTexture(mTex);			
 		}
 
 		void Texture::bind()
 		{
-			::glBindTexture(GL_TEXTURE_2D, mTex);
-            CHECK_GL_ERROR();
-            refreshState();            
+            mContext->bindTexture(mTex);
+            refreshState();
 		}
 
 		void Texture::unbind()

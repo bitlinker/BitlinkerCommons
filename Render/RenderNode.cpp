@@ -27,7 +27,7 @@ namespace Commons
 			if (m_isVisible)
 			{
 				// TODO: identity matrix optimization
-				glm::mat4& nodeMatrix = matrix * m_translation;
+				glm::mat4 nodeMatrix = matrix * m_translation;
 
 				doRender(nodeMatrix);
 				for (auto child : m_children)

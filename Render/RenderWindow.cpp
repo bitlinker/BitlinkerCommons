@@ -1,5 +1,5 @@
 #include <Render/RenderWindow.h>
-#include <Exception/exception.h>
+#include <Exception/Exception.h>
 #include <Logger/Log.h>
 
 namespace Commons
@@ -13,14 +13,14 @@ namespace Commons
 			// FSAA
 			//::glfwWindowHint(GLFW_SAMPLES, 16);
 
-			::glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
-			::glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 3);
+			//::glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
+			//::glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 3);
 
-			//::glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-			//::glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+			::glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+			::glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-			::glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-		    ::glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+			//::glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+		    //::glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 			// TODO: monitor & res selection
 			GLFWmonitor* mon = params.isFullscreen ? ::glfwGetPrimaryMonitor() : NULL;

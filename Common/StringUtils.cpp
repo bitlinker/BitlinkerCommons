@@ -1,10 +1,11 @@
 #include <Common/StringUtils.h>
-#include <cstdarg>
+#include <stdio.h>
+#include <stdarg.h>
 
 namespace Commons
 {    
     // TODO: for linux/mac
-    /*static int _vscprintf(const char * format, va_list pargs)
+    static int _vscprintf(const char * format, va_list pargs)
     {
         int retval;
         va_list argcopy;
@@ -12,7 +13,7 @@ namespace Commons
         retval = vsnprintf(NULL, 0, format, argcopy);
         va_end(argcopy);
         return retval;
-    }*/
+    }
 
     const std::string StringUtils::FormatString(const char* fmt, ...)
     {        
