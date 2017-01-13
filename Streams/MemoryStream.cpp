@@ -59,7 +59,7 @@ uint32_t MemoryStream::size()
 	return m_size;
 }
 
-bool FileStream::isEOF()
+bool MemoryStream::isEOF()
 {
 	return m_pos >= m_size;
 }
