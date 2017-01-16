@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{3d305789-9c72-484f-8295-0302de3efc4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exception">
+      <UniqueIdentifier>{0b6d2a2e-b3bd-412c-8a69-c0f701ff90c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imaging">
+      <UniqueIdentifier>{f35257a4-1db8-4fb0-a3fd-73ff2f327066}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{3d43b343-6a2b-422d-9a04-54a66a57808f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{27a3c557-f519-4a16-937a-1308173d18b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Streams">
+      <UniqueIdentifier>{236b7b97-a3a2-48de-996b-de4734b8fd0a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Common\Endianness.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\StringUtils.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Imaging\BicubicInterpolator.cpp">
+      <Filter>Imaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Imaging\BilinearInterpolator.cpp">
+      <Filter>Imaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Imaging\DdsImageDecoder.cpp">
+      <Filter>Imaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Imaging\TgaImageEncoder.cpp">
+      <Filter>Imaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger\Log.cpp">
+      <Filter>Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Camera.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Frustum.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\GLContext.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Init.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderNode.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderWindow.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Shader.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\ShaderProgram.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\SharedTextureMgr.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Texture.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Streams\FileStream.cpp">
+      <Filter>Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="Streams\MemoryStream.cpp">
+      <Filter>Streams</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Endianness.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\NonCopyable.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\NonObject.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Singleton.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\StringUtils.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception\Exception.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="Imaging\BicubicInterpolator.h">
+      <Filter>Imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Imaging\BilinearInterpolator.h">
+      <Filter>Imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Imaging\DdsImageDecoder.h">
+      <Filter>Imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Imaging\IInterpolator.h">
+      <Filter>Imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Imaging\ImageDecoder.h">
+      <Filter>Imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Imaging\ImageInfo.h">
+      <Filter>Imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Imaging\TgaImageEncoder.h">
+      <Filter>Imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger\Log.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\AABB.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\BufferObject.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Camera.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Frustum.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\GLContext.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\IBindable.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Init.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\ITextureLoader.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderCommon.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderNode.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderWindow.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\ScopeBind.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Shader.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\ShaderProgram.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\SharedTextureMgr.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Texture.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\VertexArrayObject.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Streams\FileStream.h">
+      <Filter>Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="Streams\IOStream.h">
+      <Filter>Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="Streams\MemoryStream.h">
+      <Filter>Streams</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -2,7 +2,7 @@
 
 namespace Commons
 {
-    EndiannessType Endianness::getCpuEndianness()
+	Endianness::EndiannessType Endianness::getCpuEndianness()
     {
         short int word = 0x0001;
         char *byte = (char *)&word;
