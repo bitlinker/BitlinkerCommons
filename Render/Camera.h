@@ -37,7 +37,7 @@ namespace Commons
 		private:
 			glm::mat4 m_proj;
 
-			glm::vec3 m_pos;
+			glm::vec3 mPos;
 			glm::quat m_rot;
 
 			// Matrix cache

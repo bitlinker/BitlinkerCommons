@@ -1,24 +1,26 @@
+#include <Common/StringUtils.h>
 #include <Streams/MemoryStream.h>
-#include <iostream>
+#include <Exception/Exception.h>
 #include <memory.h>
+#include <algorithm>
 
 namespace Commons
 {
     MemoryStream::MemoryStream(uint8_t* buffer, size_type size)
-    : m_buffer()
-    , m_Ptr(buffer)
-    , m_isExternPtr(true)
-    , m_size(size)
-    , m_pos(0)
+    : mBuffer()
+    , mPtr(buffer)
+    , mIsExternPtr(true)
+    , mSize(size)
+    , mPos(0)
     {
     }
 
     MemoryStream::MemoryStream(size_type size)
-    : m_buffer(size)
-    , m_Ptr(&m_buffer[0])
-    , m_isExternPtr(false)
-    , m_size(size)
-    , m_pos(0)
+    : mBuffer(size)
+    , mPtr(&mBuffer[0])
+    , mIsExternPtr(false)
+    , mSize(size)
+    , mPos(0)
     {
     }
 
@@ -26,80 +28,86 @@ namespace Commons
     {
     }
 
-    void MemoryStream::write(const void* data, size_type size)
+    IOStream::size_type MemoryStream::write(const void* data, size_type size)
     {
-        if (m_pos + size <= m_size)
+        if (mPos > mSize) return 0;
+
+        size_type realSize = std::min(size, mSize - mPos);
+        if (realSize > 0)
         {
-            ::memcpy(static_cast<uint8_t*>(m_Ptr) + m_pos, data, size);
-            m_pos += size;
+            ::memcpy(static_cast<uint8_t*>(mPtr) + mPos, data, realSize);
+            mPos += realSize;
         }
-        else
-        {
-            throw std::ios_base::failure("writing out of buffer bounds");
-        }
+        return realSize;
     }
 
-    void MemoryStream::read(void* data, size_type size)
+    IOStream::size_type MemoryStream::read(void* data, size_type size)
     {
-        if (m_pos + size <= m_size)
+        if (mPos > mSize) return 0;
+
+        size_type realSize = std::min(size, mSize - mPos);
+        if (realSize > 0)
         {
-            ::memcpy(data, static_cast<uint8_t*>(m_Ptr) + m_pos, size);
-            m_pos += size;
+            ::memcpy(data, static_cast<uint8_t*>(mPtr) + mPos, realSize);
+            mPos += realSize;
         }
-        else
-        {
-            throw std::ios_base::failure("reading out of buffer bounds");
-        }
+        return realSize;
     }
 
     IOStream::size_type MemoryStream::tell()
     {
-        return m_pos;
+        return mPos;
     }
 
     IOStream::size_type MemoryStream::size()
     {
-        return m_size;
+        return mSize;
     }
 
     bool MemoryStream::isEOF()
     {
-        return m_pos >= m_size;
+        return mPos >= mSize;
     }
+
+    void MemoryStream::seekSet(offset_type offset)
+    {
+        if (offset >= 0 && static_cast<size_type>(offset) < mSize)
+            mPos = offset;
+        else
+            throw IOException("Seek beyond buffer size");
+    }
+
+    void MemoryStream::seekCur(offset_type offset)
+    {
+        if ((offset >= 0 && static_cast<uint32_t>(offset) + mPos < mSize) ||
+            (offset < 0 && static_cast<uint32_t>(-offset) < mSize - mPos))
+        {
+            mPos += offset;
+        }
+        else
+            throw IOException("Seek beyond buffer size or start");
+    }
+
+    void MemoryStream::seekEnd(offset_type offset)
+    {
+        if (offset <= 0 && static_cast<uint32_t>(-offset) < mSize)
+        {
+            mPos = mSize - offset;
+        }
+        else
+            throw IOException("Seek below buffer size");
+    }
+
+    //throw IOException("Seek failed");
 
     void MemoryStream::seek(offset_type offset, Origin origin)
     {
-        bool result = true;
         switch (origin)
         {
-        case IOStream::ORIGIN_SET:
-            if (offset >= 0 && static_cast<uint32_t>(offset) < m_size)
-                m_pos = offset;
-            else
-                result = false;
-            break;
-        case IOStream::ORIGIN_CUR:
-            if ((offset >= 0 && static_cast<uint32_t>(offset) + m_pos < m_size) ||
-                (offset < 0 && static_cast<uint32_t>(-offset) < m_size - m_pos))
-            {
-                m_pos += offset;
-            }
-            else
-                result = false;
-            break;
-        case IOStream::ORIGIN_END:
-            if (offset <= 0 && static_cast<uint32_t>(-offset) < m_size)
-            {
-                m_pos = m_size - offset;
-            }
-            else
-                result = false;
-            break;
-        default:
-            result = false;
+        case IOStream::ORIGIN_SET: seekSet(offset); break;
+        case IOStream::ORIGIN_CUR: seekCur(offset); break;           
+        case IOStream::ORIGIN_END: seekEnd(offset); break;
+        default: throw IOException(StringUtils::FormatString("Unknown seek origin: %d", origin));
         }
-
-        if (!result)
-            throw std::ios_base::failure("seek failed");
     }
 }

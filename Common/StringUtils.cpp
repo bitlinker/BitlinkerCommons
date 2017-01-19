@@ -4,16 +4,16 @@
 
 namespace Commons
 {    
-    // TODO: for linux/mac
-    static int _vscprintf(const char * format, va_list pargs)
-    {
-        int retval;
-        va_list argcopy;
-        va_copy(argcopy, pargs);
-        retval = vsnprintf(NULL, 0, format, argcopy);
-        va_end(argcopy);
-        return retval;
-    }
+    //// TODO: for linux/mac
+    //static int _vscprintf(const char * format, va_list pargs)
+    //{
+    //    int retval;
+    //    va_list argcopy;
+    //    va_copy(argcopy, pargs);
+    //    retval = vsnprintf(NULL, 0, format, argcopy);
+    //    va_end(argcopy);
+    //    return retval;
+    //}
 
     const std::string StringUtils::FormatString(const char* fmt, ...)
     {        

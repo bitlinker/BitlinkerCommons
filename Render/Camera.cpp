@@ -6,7 +6,7 @@ namespace Commons
 	{
 		Camera::Camera()
 			: m_proj()
-			, m_pos()
+			, mPos()
 			, m_rot()
 			, mIsModelViewDirty(true)
             , mFrustum()
@@ -34,12 +34,12 @@ namespace Commons
 
 		const glm::vec3 Camera::getTranslation() const
 		{
-			return m_pos;
+			return mPos;
 		}
 
 		void Camera::setTranslation(const glm::vec3& pos)
 		{
-			m_pos = pos;
+			mPos = pos;
 			mIsModelViewDirty = true;
             mIsFrustumDirty = true;
 		}
@@ -62,7 +62,7 @@ namespace Commons
 			{
 				mModelView = glm::mat4(); // TODO: optimize
                 mModelView *= glm::mat4_cast(-m_rot);
-                mModelView *= glm::translate(-m_pos);
+                mModelView *= glm::translate(-mPos);
 				mIsModelViewDirty = false;
 			}
 			return mModelView;

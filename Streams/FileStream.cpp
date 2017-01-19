@@ -8,12 +8,10 @@ namespace Commons
     {
         switch (mode)
         {
-        case FileStream::MODE_READ:
-            return "rb";
-        case FileStream::MODE_WRITE:
-            return "wb";
+        case FileStream::MODE_READ: return "rb";
+        case FileStream::MODE_WRITE: return "wb";
         }
-        return "";
+        throw IOException(StringUtils::FormatString("Unknown file mode: %d", mode));
     }
 
     static int TranslateOrigin(FileStream::Origin origin)
@@ -31,9 +29,9 @@ namespace Commons
     }
 
     FileStream::FileStream(const std::string& fileName, Mode mode)
-    : m_f(nullptr)
+    : mF(nullptr)
     {
-        if ((m_f = ::fopen(fileName.c_str(), TranslateMode(mode))) != 0)
+        if ((mF = ::fopen(fileName.c_str(), TranslateMode(mode))) == 0)
         {
             throw IOException(StringUtils::FormatString("Can't open file %s", fileName.data()));
         }
@@ -41,50 +39,44 @@ namespace Commons
 
     FileStream::~FileStream()
     {
-        ::fclose(m_f);
-        m_f = nullptr;
+        ::fclose(mF);
+        mF = nullptr;
     }
 
-    void FileStream::write(const void* data, size_type size)
+    IOStream::size_type FileStream::write(const void* data, size_type size)
     {
-        if (::fwrite(data, size, 1, m_f) != 1)
-        {
-            throw IOException("write failed");
-        }
+        return ::fwrite(data, 1, size, mF);
     }
 
-    void FileStream::read(void* data, size_type size)
+    IOStream::size_type FileStream::read(void* data, size_type size)
     {
-        if (::fread(data, size, 1, m_f) != 1)
-        {
-            throw IOException("read failed");
-        }
+        return ::fread(data, 1, size, mF);        
     }
 
     IOStream::size_type FileStream::tell()
     {
-        return ::ftell(m_f);
+        return ::ftell(mF);
     }
 
     IOStream::size_type FileStream::size()
     {
-        uint32_t curPos = tell();
+        size_type curPos = tell();
         seek(0, ORIGIN_END);
-        uint32_t result = tell();
+        size_type result = tell();
         seek(curPos, ORIGIN_SET);
         return result;
     }
 
     bool FileStream::isEOF()
     {
-        return (::feof(m_f) != 0);
+        return (::feof(mF) != 0);
     }
 
     void FileStream::seek(offset_type offset, Origin origin)
     {
-        if (::fseek(m_f, offset, TranslateOrigin(origin)) != 0)
+        if (::fseek(mF, offset, TranslateOrigin(origin)) != 0)
         {
-            throw IOException("seek failed");
+            throw IOException("Seek failed");
         }
     }
 }

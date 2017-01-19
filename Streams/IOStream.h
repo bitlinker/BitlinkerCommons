@@ -20,8 +20,8 @@ namespace Commons
     public:
         virtual ~IOStream() {};
 
-        virtual void write(const void* data, size_type size) = 0;
-        virtual void read(void* data, size_type size) = 0;
+        virtual size_type write(const void* data, size_type size) = 0;
+        virtual size_type read(void* data, size_type size) = 0;
         virtual size_type tell() = 0;
         virtual size_type size() = 0;
         virtual bool isEOF() = 0;

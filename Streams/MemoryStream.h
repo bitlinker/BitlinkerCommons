@@ -12,24 +12,29 @@ namespace Commons
         MemoryStream(size_type size);
         virtual ~MemoryStream();
 
-        void* getPtr() const { return m_Ptr; }
-        const void* getConstPtr() const { return m_Ptr; }
-        void* getCurPtr() const { return m_Ptr + m_pos; }
-        const void* getCurConstPtr() const { return m_Ptr + m_pos; }
+        void* getPtr() const { return mPtr; }
+        const void* getConstPtr() const { return mPtr; }
+        void* getCurPtr() const { return mPtr + mPos; }
+        const void* getCurConstPtr() const { return mPtr + mPos; }
 
-        virtual void write(const void* data, size_type size);
-        virtual void read(void* data, size_type size);
+        virtual size_type write(const void* data, size_type size);
+        virtual size_type read(void* data, size_type size);
         virtual size_type tell();
         virtual size_type size();
         virtual bool isEOF();
         virtual void seek(offset_type offset, Origin origin);
 
     private:
-        std::vector<uint8_t> m_buffer;
-        uint8_t* m_Ptr;
-        bool m_isExternPtr;
-        size_type m_size;
-        size_type m_pos;
+        void seekSet(offset_type offset);
+        void seekCur(offset_type offset);
+        void seekEnd(offset_type offset);
+
+    private:
+        std::vector<uint8_t> mBuffer;
+        uint8_t* mPtr;
+        bool mIsExternPtr;
+        size_type mSize;
+        size_type mPos;
     };
 
     typedef std::shared_ptr<MemoryStream> MemoryStreamPtr;

@@ -36,6 +36,7 @@
     <ClCompile Include="Render\ShaderProgram.cpp" />
     <ClCompile Include="Render\SharedTextureMgr.cpp" />
     <ClCompile Include="Render\Texture.cpp" />
+    <ClCompile Include="Streams\StreamReader.cpp" />
     <ClCompile Include="Streams\FileStream.cpp" />
     <ClCompile Include="Streams\MemoryStream.cpp" />
   </ItemGroup>
@@ -71,6 +72,7 @@
     <ClInclude Include="Render\SharedTextureMgr.h" />
     <ClInclude Include="Render\Texture.h" />
     <ClInclude Include="Render\VertexArrayObject.h" />
+    <ClInclude Include="Streams\StreamReader.h" />
     <ClInclude Include="Streams\FileStream.h" />
     <ClInclude Include="Streams\IOStream.h" />
     <ClInclude Include="Streams\MemoryStream.h" />
