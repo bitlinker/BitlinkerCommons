@@ -27,8 +27,8 @@ namespace Commons
 			const glm::mat4& getTranslation() const { return m_translation; }
 			void setTranslation(const glm::mat4& translation) { m_translation = translation; }
 
-			const std::string& getName() const { return m_name; }
-			void setName(const std::string& name) { m_name = name; }
+			const std::string& getName() const { return mName; }
+			void setName(const std::string& name) { mName = name; }
 
 			bool isVisible() const { return m_isVisible; }
 			void setVisible(bool visible) { m_isVisible = visible; }
@@ -44,7 +44,7 @@ namespace Commons
 			glm::mat4 m_translation;
 			std::list<RenderNodePtr> m_children;
 			RenderNodeWeakPtr m_parent;
-			std::string m_name;
+			std::string mName;
 			bool m_isVisible;
 		};
 	}

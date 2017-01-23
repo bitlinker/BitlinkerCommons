@@ -8,7 +8,7 @@ namespace Commons
 			: m_translation()
 			, m_children()
 			, m_parent()
-			, m_name()
+			, mName()
 			, m_isVisible(true)
 		{
 		}
@@ -17,7 +17,7 @@ namespace Commons
 			: m_translation()
 			, m_children()
 			, m_parent()
-			, m_name(name)
+			, mName(name)
 			, m_isVisible(true)
 		{
 		}
