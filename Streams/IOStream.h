@@ -26,6 +26,7 @@ namespace Commons
         virtual size_type size() = 0;
         virtual bool isEOF() = 0;
         virtual void seek(offset_type offset, Origin origin) = 0;
+        virtual void flush() = 0;
     };
 
     typedef std::shared_ptr<IOStream> IOStreamPtr;

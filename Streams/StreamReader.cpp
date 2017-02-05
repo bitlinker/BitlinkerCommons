@@ -1,13 +1,14 @@
 #include <Common/StringUtils.h>
 #include <Streams/StreamReader.h>
 #include <Exception/Exception.h>
+#include <cassert>
 
 namespace Commons {
     StreamReader::StreamReader(const IOStreamPtr& stream, Endianness::EndiannessType endianness)
         : mStream(stream)
     {
-        Endianness::EndiannessType cpuEndianness = Endianness::getCpuEndianness();
-        mNeedSwap = (cpuEndianness != endianness);
+        assert(stream);
+        mNeedSwap = Endianness::NeedSwap(endianness);
     }
 
     StreamReader::~StreamReader()
@@ -16,11 +17,12 @@ namespace Commons {
 
     // TODO:
     // BufferedInputStream
-    // TextInputString
+    // TextInputStream
 
     void StreamReader::read(void* data, IOStream::size_type size)
     {
-        mStream->read(data, size);
+        if (mStream->read(data, size) != size)
+            throw IOException(StringUtils::FormatString("IO Error at %d", mStream->tell()));
     }
 
     IOStream::size_type StreamReader::tell()
@@ -59,8 +61,7 @@ namespace Commons {
     {
         uint32_t origVal;
         readChecked(origVal);
-        if (mNeedSwap) 
-            return Endianness::ByteSwapUInt32(origVal);
+        if (mNeedSwap) Endianness::Swap32(&origVal);
         return origVal;
     }
 
@@ -68,8 +69,7 @@ namespace Commons {
     {
         uint16_t origVal;
         readChecked(origVal);
-        if (mNeedSwap) 
-            return Endianness::ByteSwapUInt16(origVal);
+        if (mNeedSwap) Endianness::Swap16(&origVal);
         return origVal;
     }
 
@@ -84,11 +84,7 @@ namespace Commons {
     {
         float origVal;
         readChecked(origVal);
-        if (mNeedSwap)
-        {
-            uint32_t* val = reinterpret_cast<uint32_t*>(&origVal);
-            *val = Endianness::ByteSwapUInt32(*val);
-        }
+        if (mNeedSwap) Endianness::Swap32(&origVal);
         return origVal;
     }
 

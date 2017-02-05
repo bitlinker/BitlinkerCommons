@@ -81,6 +81,9 @@
     <ClCompile Include="Streams\StreamReader.cpp">
       <Filter>Streams</Filter>
     </ClCompile>
+    <ClCompile Include="Streams\StreamWriter.cpp">
+      <Filter>Streams</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Endianness.h">
@@ -186,6 +189,9 @@
       <Filter>Streams</Filter>
     </ClInclude>
     <ClInclude Include="Streams\StreamReader.h">
+      <Filter>Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="Streams\StreamWriter.h">
       <Filter>Streams</Filter>
     </ClInclude>
   </ItemGroup>

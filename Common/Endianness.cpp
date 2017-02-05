@@ -2,22 +2,28 @@
 
 namespace Commons
 {
-	Endianness::EndiannessType Endianness::getCpuEndianness()
+	Endianness::EndiannessType Endianness::GetCpuEndianness()
     {
         short int word = 0x0001;
         char *byte = (char *)&word;
         return (byte[0] == 0) ? BIG_ENDIAN : LITTLE_ENDIAN;
     }
 
-    uint16_t Endianness::ByteSwapUInt16(uint16_t source)
+    bool Endianness::NeedSwap(EndiannessType target)
     {
-        return ((source & 0xff) << 8) | ((source & 0xff00) >> 8);
+        return GetCpuEndianness() != target;
     }
 
-    uint32_t Endianness::ByteSwapUInt32(uint32_t source)
+    void Endianness::Swap16(void* src)
     {
-        source = (source & 0x0000FFFF) << 16 | (source & 0xFFFF0000) >> 16;
-        source = (source & 0x00FF00FF) << 8 | (source & 0xFF00FF00) >> 8;
-        return source;
+        uint16_t* source = reinterpret_cast<uint16_t*>(src);
+        *source = ((*source & 0xff) << 8) | ((*source & 0xff00) >> 8);
+    }
+
+    void Endianness::Swap32(void* src)
+    {
+        uint32_t* source = reinterpret_cast<uint32_t*>(src);
+        *source = (*source & 0x0000FFFF) << 16 | (*source & 0xFFFF0000) >> 16;
+        *source = (*source & 0x00FF00FF) << 8 | (*source & 0xFF00FF00) >> 8;
     }    
 }

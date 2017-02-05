@@ -23,6 +23,8 @@ namespace Commons
         float readFloat();
         std::string readNullTermString(uint32_t reserveBuf = 256);
 
+        bool needSwap() const { return mNeedSwap; }
+
     private:
         template<typename T>
         void readChecked(T& value);

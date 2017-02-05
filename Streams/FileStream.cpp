@@ -79,4 +79,12 @@ namespace Commons
             throw IOException("Seek failed");
         }
     }
+
+    void FileStream::flush()
+    {
+        if (::fflush(mF) != 0)
+        {
+            throw IOException("Flush failed");
+        }
+    }
 }

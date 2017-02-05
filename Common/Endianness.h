@@ -13,9 +13,10 @@ namespace Commons
             BIG_ENDIAN
         };
 
-        static EndiannessType getCpuEndianness();
+        static EndiannessType GetCpuEndianness();
+        static bool NeedSwap(EndiannessType target);
 
-        static uint16_t ByteSwapUInt16(uint16_t source);
-        static uint32_t ByteSwapUInt32(uint32_t source);
+        static void Swap16(void* src);
+        static void Swap32(void* src);
     };
 }

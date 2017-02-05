@@ -39,6 +39,7 @@
     <ClCompile Include="Streams\StreamReader.cpp" />
     <ClCompile Include="Streams\FileStream.cpp" />
     <ClCompile Include="Streams\MemoryStream.cpp" />
+    <ClCompile Include="Streams\StreamWriter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Endianness.h" />
@@ -76,6 +77,7 @@
     <ClInclude Include="Streams\FileStream.h" />
     <ClInclude Include="Streams\IOStream.h" />
     <ClInclude Include="Streams\MemoryStream.h" />
+    <ClInclude Include="Streams\StreamWriter.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F6EAF9A2-3F22-4F5E-BCC6-51076AEDB4AD}</ProjectGuid>

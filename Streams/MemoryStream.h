@@ -23,6 +23,7 @@ namespace Commons
         virtual size_type size();
         virtual bool isEOF();
         virtual void seek(offset_type offset, Origin origin);
+        virtual void flush() {};
 
     private:
         void seekSet(offset_type offset);
