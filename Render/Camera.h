@@ -7,6 +7,9 @@ namespace Commons
 {
 	namespace Render
 	{
+		class Camera;
+		typedef std::shared_ptr<Camera> CameraPtr;
+
         /*
         * The initial camera orientation is following:
         * x axis - left,
@@ -15,8 +18,12 @@ namespace Commons
         */
 		class Camera
 		{
-		public:
+		private:
 			Camera();
+
+		public:
+			static CameraPtr MakePerspectiveCamera(float fovy, float aspect, float far, float near);
+			static CameraPtr MakeOrthoCamera(float left, float top, float right, float bottom, float far, float near);
 			~Camera();
 
 			void setPerspective(float fovy, float aspect, float far, float near);
@@ -48,7 +55,5 @@ namespace Commons
             mutable Frustum mFrustum;
             mutable bool mIsFrustumDirty;
 		};
-
-		typedef std::shared_ptr<Camera> CameraPtr;
 	}
 }

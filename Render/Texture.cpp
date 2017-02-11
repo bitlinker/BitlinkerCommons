@@ -1,5 +1,5 @@
 #include <Render/Texture.h>
-#include <Render/GLContext.h>
+#include <Render/Context.h>
 #include <cassert>
 
 namespace Commons
@@ -31,7 +31,7 @@ namespace Commons
             }
         }
 
-		Texture::Texture(GLContext* context)
+		Texture::Texture(Context* context)
 			: mContext(context)
             , mTex(0)
             , mMinFilter(TranslateFilterMode(FILTER_LINEAR))
@@ -73,47 +73,6 @@ namespace Commons
             }
         }
 
-        static void TranslateFormat(Texture::FormatMode format, GLenum& glFormat, GLenum& glInternalFormat)
-        {
-            switch (format)
-            {
-            case Commons::Render::Texture::FORMAT_RGBA:
-                glFormat = GL_RGBA;
-                glInternalFormat = GL_RGBA;
-                break;
-            case Commons::Render::Texture::FORMAT_RGB:
-                glFormat = GL_RGB;
-                glInternalFormat = GL_RGB;
-                break;
-            case Texture::FORMAT_LUMINANCE:
-                glFormat = GL_LUMINANCE;
-                glInternalFormat = GL_LUMINANCE;
-            case Texture::FORMAT_ALPHA:
-                glFormat = GL_ALPHA;
-                glInternalFormat = GL_ALPHA;
-            default:
-                assert("Unsupported texture format");
-            }
-        }
-
-        void Texture::setData(uint32_t level, FormatMode format, uint32_t width, uint32_t height, const uint8_t* pixels)
-        {
-            bind(); // TODO: check if bound already?
-            GLenum glFormat, glInternalFormat;
-            TranslateFormat(format, glFormat, glInternalFormat);
-            ::glTexImage2D(GL_TEXTURE_2D, level, glInternalFormat, width, height, 0, glFormat, GL_UNSIGNED_BYTE, pixels);
-            CHECK_GL_ERROR();
-        }
-
-        void Texture::setSubData(uint32_t level, FormatMode format, uint32_t x, uint32_t y, uint32_t width, uint32_t height, const uint8_t* pixels)
-        {
-            bind(); // TODO: check if bound already?
-            GLenum glFormat, glInternalFormat; // TODO: cache format
-            TranslateFormat(format, glFormat, glInternalFormat);
-            ::glTexSubImage2D(GL_TEXTURE_2D, level, x, y, width, height, glFormat, GL_UNSIGNED_BYTE, pixels);
-            CHECK_GL_ERROR();
-        }
-    
         void Texture::setFilters(FilterMode minFilter, FilterMode magFilter)
         {
             mMinFilter = TranslateFilterMode(minFilter);

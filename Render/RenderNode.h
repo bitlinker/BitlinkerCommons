@@ -46,6 +46,7 @@ namespace Commons
 			RenderNodeWeakPtr m_parent;
 			std::string mName;
 			bool m_isVisible;
+			// TODO: optional bbox
 		};
 	}
 }

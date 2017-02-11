@@ -72,11 +72,6 @@ namespace Commons
 			return true;
 		}
 
-		double RenderWindow::getCurTime() const
-		{
-			return ::glfwGetTime();
-		}
-
 		void RenderWindow::swapBuffers()
 		{
 			::glfwSwapBuffers(m_window.get());

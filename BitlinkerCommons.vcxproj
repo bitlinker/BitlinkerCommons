@@ -28,14 +28,15 @@
     <ClCompile Include="Logger\Log.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Frustum.cpp" />
-    <ClCompile Include="Render\GLContext.cpp" />
-    <ClCompile Include="Render\Init.cpp" />
+    <ClCompile Include="Render\Context.cpp" />
+    <ClCompile Include="Render\Initializer.cpp" />
     <ClCompile Include="Render\RenderNode.cpp" />
     <ClCompile Include="Render\RenderWindow.cpp" />
     <ClCompile Include="Render\Shader.cpp" />
     <ClCompile Include="Render\ShaderProgram.cpp" />
     <ClCompile Include="Render\SharedTextureMgr.cpp" />
     <ClCompile Include="Render\Texture.cpp" />
+    <ClCompile Include="Render\Texture2d.cpp" />
     <ClCompile Include="Streams\StreamReader.cpp" />
     <ClCompile Include="Streams\FileStream.cpp" />
     <ClCompile Include="Streams\MemoryStream.cpp" />
@@ -60,9 +61,9 @@
     <ClInclude Include="Render\BufferObject.h" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Frustum.h" />
-    <ClInclude Include="Render\GLContext.h" />
+    <ClInclude Include="Render\Context.h" />
     <ClInclude Include="Render\IBindable.h" />
-    <ClInclude Include="Render\Init.h" />
+    <ClInclude Include="Render\Initializer.h" />
     <ClInclude Include="Render\ITextureLoader.h" />
     <ClInclude Include="Render\RenderCommon.h" />
     <ClInclude Include="Render\RenderNode.h" />
@@ -72,6 +73,7 @@
     <ClInclude Include="Render\ShaderProgram.h" />
     <ClInclude Include="Render\SharedTextureMgr.h" />
     <ClInclude Include="Render\Texture.h" />
+    <ClInclude Include="Render\Texture2d.h" />
     <ClInclude Include="Render\VertexArrayObject.h" />
     <ClInclude Include="Streams\StreamReader.h" />
     <ClInclude Include="Streams\FileStream.h" />

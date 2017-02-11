@@ -8,7 +8,7 @@ namespace Commons
 {
 	namespace Render
 	{
-        class GLContext;
+        class Context;
 
         // TODO: texture2d
 		class Texture : public IBindable, public NonCopyable
@@ -38,15 +38,12 @@ namespace Commons
 		public:
             // TODO: rename to texture2d; texture; texturearray; texture3d; texturecube
             // TODO: construct from image data
-			Texture(GLContext* context); // TODO: shared ptr?
+			Texture(Context* context); // TODO: shared ptr?
 			virtual ~Texture();
 
 			void setFilters(FilterMode minFilter, FilterMode magFilter);
             void setWrap(WrapMode wrapS, WrapMode wrapT);
             void setMipLevels(uint32_t start, uint32_t end);
-
-            void setData(uint32_t level, FormatMode format, uint32_t width, uint32_t height, const uint8_t* pixels);
-            void setSubData(uint32_t level, FormatMode format, uint32_t x, uint32_t y, uint32_t width, uint32_t height, const uint8_t* pixels);
 
 			virtual void bind() override;
 			virtual void unbind() override;
@@ -54,10 +51,11 @@ namespace Commons
         private:
             void refreshState();
 
-		private:
-            GLContext* mContext;
+		protected:
+            Context* mContext;
 			GLuint mTex;
 
+		private:
             // State:
             GLenum mMinFilter;
             GLenum mMagFilter;

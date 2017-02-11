@@ -19,6 +19,9 @@
     <Filter Include="Streams">
       <UniqueIdentifier>{236b7b97-a3a2-48de-996b-de4734b8fd0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render\OpenGL">
+      <UniqueIdentifier>{3e982f38-8e09-4e6f-8af9-6549de7fef28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\Endianness.cpp">
@@ -46,12 +49,6 @@
       <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="Render\Frustum.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\GLContext.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Init.cpp">
       <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="Render\RenderNode.cpp">
@@ -83,6 +80,15 @@
     </ClCompile>
     <ClCompile Include="Streams\StreamWriter.cpp">
       <Filter>Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Texture2d.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Context.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Initializer.cpp">
+      <Filter>Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,22 +137,13 @@
     <ClInclude Include="Render\AABB.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Render\BufferObject.h">
-      <Filter>Render</Filter>
-    </ClInclude>
     <ClInclude Include="Render\Camera.h">
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Render\Frustum.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Render\GLContext.h">
-      <Filter>Render</Filter>
-    </ClInclude>
     <ClInclude Include="Render\IBindable.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Init.h">
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Render\ITextureLoader.h">
@@ -193,6 +190,18 @@
     </ClInclude>
     <ClInclude Include="Streams\StreamWriter.h">
       <Filter>Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Texture2d.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Context.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Initializer.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\BufferObject.h">
+      <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

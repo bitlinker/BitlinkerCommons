@@ -1,5 +1,6 @@
 #pragma once
 #include <Render/RenderCommon.h>
+#include <Render/Context.h>
 #include <Common/NonCopyable.h>
 #include <memory>
 
@@ -7,6 +8,7 @@ namespace Commons
 {
 	namespace Render
 	{
+		// TODO: params
 		class WindowParams
 		{
 		public:
@@ -30,17 +32,19 @@ namespace Commons
 			~RenderWindow();
 
 			bool tick();
-			// TODO: make it framebuffer interace?
 			void swapBuffers();
-			void getFramebufferSize(uint32_t& width, uint32_t& height) const;
 
-			double getCurTime() const;
+			Context* getContextPtr() { return &mContext; }
+
+			void getFramebufferSize(uint32_t& width, uint32_t& height) const;
+			void getFramebuffer() {}; // TODO: impl
 
 		private:
 			void initGLEW();
 
 		private:
 			std::shared_ptr<GLFWwindow> m_window;
+			Context mContext;
 		};
 	}
 }

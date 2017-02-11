@@ -1,4 +1,5 @@
-#include <Render/GLContext.h>
+#include <Render/Context.h>
+#include <Render/RenderWindow.h>
 #include <Exception/Exception.h>
 #include <Logger/Log.h>
 
@@ -6,13 +7,13 @@ namespace Commons
 {
 	namespace Render
 	{
-		GLContext::GLContext()
+		Context::Context()
             : mCurShader(0)
             , mCurTexture(0)
 		{
 		}
 
-		GLContext::~GLContext()
+		Context::~Context()
 		{
 		}
 
@@ -30,7 +31,7 @@ namespace Commons
 
 		// TODO: clear func, state funcs
 
-		void GLContext::render(const CameraPtr& camera, const RenderNodePtr& rootNode, const RenderWindow& window)
+		void Context::render(const CameraPtr& camera, const RenderNodePtr& rootNode, const RenderWindow& window)
 		{
 			//_update_fps_counter(m_window.get());
 
@@ -56,18 +57,18 @@ namespace Commons
             CHECK_GL_ERROR();
         }
 
-        void GLContext::setBlend(bool enabled)
+        void Context::setBlend(bool enabled)
         {
             // TODO: cache?
             enableOption(enabled, GL_BLEND);
         }
 
-        void GLContext::setCullFace(bool enabled)
+        void Context::setCullFace(bool enabled)
         {
             enableOption(enabled, GL_CULL_FACE);
         }
 
-        void GLContext::setDepthTest(bool enabled)
+        void Context::setDepthTest(bool enabled)
         {
             enableOption(enabled, GL_DEPTH_TEST);
         }
@@ -85,7 +86,7 @@ namespace Commons
         //// Bind buffer
 
 
-        GLuint GLContext::genTexture()
+        GLuint Context::genTexture()
         {
             GLuint tex = 0;
             ::glGenTextures(1, &tex);
@@ -93,14 +94,15 @@ namespace Commons
             return tex;
         }
 
-        void GLContext::deleteTexture(GLuint tex)
+        void Context::deleteTexture(GLuint tex)
         {
             ::glDeleteTextures(1, &tex);
             CHECK_GL_ERROR();
         }
 
-        void GLContext::bindTexture(GLuint tex)
+        void Context::bindTexture(GLuint tex)
         {
+			// TODO: in texture
             // TODO: drop current texture on state change
             if (mCurTexture != tex)
             {

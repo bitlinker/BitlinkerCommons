@@ -9,7 +9,7 @@ namespace Commons
 {
     namespace Render
     {
-        SharedTextureMgr::SharedTextureMgr(GLContext* context)
+        SharedTextureMgr::SharedTextureMgr(Context* context)
             : mContext(context) // TODO: init members            
         {
             LOG_DEBUG("SharedTextureMgr created");

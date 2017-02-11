@@ -4,6 +4,20 @@ namespace Commons
 {
 	namespace Render
 	{
+		CameraPtr Camera::MakePerspectiveCamera(float fovy, float aspect, float far, float near)
+		{
+			CameraPtr result = CameraPtr(new Camera());
+			result->setPerspective(fovy, aspect, far, near);
+			return result;
+		}
+
+		CameraPtr Camera::MakeOrthoCamera(float left, float top, float right, float bottom, float far, float near)
+		{
+			CameraPtr result = CameraPtr(new Camera());
+			result->setOrtho(left, top, right, bottom, far, near);
+			return result;
+		}
+
 		Camera::Camera()
 			: m_proj()
 			, mPos()
@@ -17,8 +31,6 @@ namespace Commons
 		Camera::~Camera()
 		{
 		}
-
-		// TODO: separate perspective and ortho camera?
 
 		void Camera::setPerspective(float fovy, float aspect, float far, float near)
 		{
