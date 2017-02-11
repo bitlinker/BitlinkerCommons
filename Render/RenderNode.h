@@ -1,5 +1,6 @@
 #pragma once
 #include <Render/RenderCommon.h>
+#include <Render/AABB.h>
 #include <memory>
 #include <list>
 
@@ -20,18 +21,21 @@ namespace Commons
 
 			void render(const glm::mat4& matrix = glm::mat4(1.F));
 
-			bool attachChild(RenderNodePtr& child);
+			void attachChild(RenderNodePtr& child);
 			bool removeChild(RenderNodePtr& child);
 			void removeAllChildren();
 
-			const glm::mat4& getTranslation() const { return m_translation; }
-			void setTranslation(const glm::mat4& translation) { m_translation = translation; }
+			const glm::mat4& getTranslation() const { return mTranslation; }
+			void setTranslation(const glm::mat4& translation) { mTranslation = translation; }
 
 			const std::string& getName() const { return mName; }
 			void setName(const std::string& name) { mName = name; }
 
-			bool isVisible() const { return m_isVisible; }
-			void setVisible(bool visible) { m_isVisible = visible; }
+			bool isVisible() const { return mIsVisible; }
+			void setVisible(bool visible) { mIsVisible = visible; }
+
+			const AABB& getBBox() const { return mBBox; }
+			void setBBox(const AABB& bbox) { mBBox = bbox; }
 
 		protected:
 			virtual void doRender(const glm::mat4& matrix) {};
@@ -41,12 +45,12 @@ namespace Commons
 			void setParent(const RenderNodeWeakPtr& parent);
 
 		private:
-			glm::mat4 m_translation;
-			std::list<RenderNodePtr> m_children;
-			RenderNodeWeakPtr m_parent;
+			glm::mat4 mTranslation;
+			std::list<RenderNodePtr> mChildren;
+			RenderNodeWeakPtr mParent;
 			std::string mName;
-			bool m_isVisible;
-			// TODO: optional bbox
+			bool mIsVisible;
+			AABB mBBox;
 		};
 	}
 }

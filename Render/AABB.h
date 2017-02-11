@@ -9,11 +9,29 @@ namespace Commons
 		class AABB
 		{
 		public:			
+			AABB()
+				: mMins()
+				, mMaxs()
+			{
+			}
+
+			// TODO: rm this constructor
 			AABB(const int16_t mins[3], const int16_t maxs[3])
                 : mMins(mins[0], mins[1], mins[2])
                 , mMaxs(maxs[0], maxs[1], maxs[2])
             {                
             }
+
+			AABB(const glm::vec3& mins, const glm::vec3& maxs)
+				: mMins(mins)
+				, mMaxs(maxs)
+			{
+			}
+
+			bool isEmpty()
+			{
+				return mMins[0] == mMaxs[0] || mMins[1] == mMaxs[1] || mMins[2] == mMaxs[2];
+			}
 
             /*
             * Oder: bottom plane then top plane, starting from min point clockwise

@@ -5,60 +5,60 @@ namespace Commons
 	namespace Render
 	{
 		RenderNode::RenderNode()
-			: m_translation()
-			, m_children()
-			, m_parent()
+			: mTranslation()
+			, mChildren()
+			, mParent()
 			, mName()
-			, m_isVisible(true)
+			, mIsVisible(true)
+			, mBBox()
 		{
 		}
 
 		RenderNode::RenderNode(const std::string& name)
-			: m_translation()
-			, m_children()
-			, m_parent()
+			: mTranslation()
+			, mChildren()
+			, mParent()
 			, mName(name)
-			, m_isVisible(true)
+			, mIsVisible(true)
+			, mBBox()
 		{
 		}
 
+		// TODO: pass frustum for vis check here...
 		void RenderNode::render(const glm::mat4& matrix)
 		{
-			if (m_isVisible)
+			if (mIsVisible)
 			{
 				// TODO: identity matrix optimization
-				glm::mat4 nodeMatrix = matrix * m_translation;
+				glm::mat4 nodeMatrix = matrix * mTranslation;
+
+				// TODO: BBOX visibility check
 
 				doRender(nodeMatrix);
-				for (auto child : m_children)
+				for (auto child : mChildren)
 				{
 					child->render(nodeMatrix);
 				}
 			}
 		}
 
-		bool RenderNode::attachChild(RenderNodePtr& child)
+		void RenderNode::attachChild(RenderNodePtr& child)
 		{
-			if (child)
-			{
-				m_children.push_back(child);
-				child->setParent(shared_from_this());
-				return true;
-			}
-
-			return false;
+			assert(child);
+			mChildren.push_back(child);
+			child->setParent(shared_from_this());
 		}
 
 		bool RenderNode::removeChild(RenderNodePtr& child)
 		{
-			auto it = m_children.begin();
-			auto itEnd = m_children.end();
+			auto it = mChildren.begin();
+			auto itEnd = mChildren.end();
 			while (it != itEnd)
 			{
 				if (*it == child)
 				{
 					child->setParent(RenderNodeWeakPtr(shared_from_this()));
-					m_children.erase(it);
+					mChildren.erase(it);
 					return true;
 				}
 			}
@@ -68,21 +68,21 @@ namespace Commons
 
 		void RenderNode::removeAllChildren()
 		{
-			for (auto child : m_children)
+			for (auto child : mChildren)
 			{
 				child->setParent(RenderNodeWeakPtr());
 			}
-			m_children.clear();
+			mChildren.clear();
 		}
 
 		const RenderNodeWeakPtr RenderNode::getParent() const
 		{
-			return m_parent;
+			return mParent;
 		}
 
 		void RenderNode::setParent(const RenderNodeWeakPtr& parent)
 		{
-			m_parent = parent;
+			mParent = parent;
 		}
 	}
 }
