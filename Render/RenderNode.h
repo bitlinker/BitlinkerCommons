@@ -12,6 +12,16 @@ namespace Commons
 		typedef std::shared_ptr<RenderNode> RenderNodePtr;
 		typedef std::weak_ptr<RenderNode> RenderNodeWeakPtr;
 
+        // TODO: move
+        class IRenderable
+        {
+        public:
+            virtual void render(const glm::mat4& matrix) = 0;
+            virtual ~IRenderable() {};
+        };
+        typedef std::shared_ptr<IRenderable> IRenderablePtr;
+
+        // TODO: not node; component system
 		class RenderNode : public std::enable_shared_from_this<RenderNode>
 		{
 		public:
@@ -37,8 +47,8 @@ namespace Commons
 			const AABB& getBBox() const { return mBBox; }
 			void setBBox(const AABB& bbox) { mBBox = bbox; }
 
-		protected:
-			virtual void doRender(const glm::mat4& matrix) {};
+            const IRenderablePtr& getRenderable() const { return mRenderable; }
+            void setRenderable(const IRenderablePtr& renderable) { mRenderable = renderable; }
 
 		private:
 			const RenderNodeWeakPtr getParent() const;
@@ -51,6 +61,7 @@ namespace Commons
 			std::string mName;
 			bool mIsVisible;
 			AABB mBBox;
+            IRenderablePtr mRenderable;
 		};
 	}
 }

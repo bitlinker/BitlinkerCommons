@@ -11,6 +11,7 @@ namespace Commons
 			, mName()
 			, mIsVisible(true)
 			, mBBox()
+            , mRenderable()
 		{
 		}
 
@@ -21,6 +22,7 @@ namespace Commons
 			, mName(name)
 			, mIsVisible(true)
 			, mBBox()
+            , mRenderable()
 		{
 		}
 
@@ -34,7 +36,11 @@ namespace Commons
 
 				// TODO: BBOX visibility check
 
-				doRender(nodeMatrix);
+				if (mRenderable)
+                { 
+                    mRenderable->render(nodeMatrix);
+                }
+
 				for (auto child : mChildren)
 				{
 					child->render(nodeMatrix);
